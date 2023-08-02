@@ -46,4 +46,4 @@
     
     {{log('Null value Test case executed',info=true)}}
 
-{% endmacro%}
+{% endmacro %}

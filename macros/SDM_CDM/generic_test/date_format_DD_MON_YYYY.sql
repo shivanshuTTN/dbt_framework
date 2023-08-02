@@ -18,4 +18,4 @@
     {{log(date_format_list[0],info=true)}}
 
 {{log('date_format_DD_MON_YYYY test execution ended ',info=true)}}
-{% endmacro%}
+{% endmacro %}

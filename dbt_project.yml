@@ -82,3 +82,7 @@ vars:
     suite_name: suite_id                           #suite id of a particular suite
     test_case_status: test_case_status             # status of test case
     suite_start_time: suite_start_at               #execution start time of suite
+
+    foreign_key_column_cust: id
+    foreign_key_column_order: user_id
+    o_status: shipped

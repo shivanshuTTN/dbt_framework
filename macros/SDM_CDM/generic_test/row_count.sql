@@ -48,4 +48,4 @@
     
     {{log('Row Count Test case executed',info=true)}}
 
-{% endmacro%}
+{% endmacro %}

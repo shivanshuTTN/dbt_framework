@@ -46,4 +46,4 @@
 
     {{log('not empty test case ends',info=true)}}
 
-{%endmacro%}
+{% endmacro %}

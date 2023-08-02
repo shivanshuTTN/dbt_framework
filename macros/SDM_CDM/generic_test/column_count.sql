@@ -45,4 +45,4 @@
     src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,'none',results_list[0])}}
     {{log('column value test case execution ended',info=true)}}
  
-{%endmacro%}
+{% endmacro %}
