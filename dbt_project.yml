@@ -1,0 +1,84 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'dbt_framework_dev'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'snowflake'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# In this example config, we tell dbt to build all models in the example/
+# directory as views. These settings can be overridden in the individual model
+# files using the `{{ config(...) }}` macro.
+models:
+  
+  dbt_framework_dev:
+      +materialized: view
+  #pre hook for creating a test output table for report making
+  pre-hook: CREATE TABLE IF NOT EXISTS raw_stg.cdm.TEST_OUTPUT_TABLE
+            (QUERY_ID VARCHAR(300), 
+            SUITE_START_AT VARCHAR(300),
+            EXECUTION_DATETIME VARCHAR(300),
+            SUITE_ID VARCHAR(300),
+            TEST_CASE_ID VARCHAR(300),
+            TEST_CASE_TYPE VARCHAR(300),
+            SRC_DB_NAME VARCHAR(300),
+            SRC_SCHEMA_NAME VARCHAR(300),
+            SRC_TABLE_NAME VARCHAR(300),
+            TRG_DB_NAME VARCHAR(300),
+            TRG_SCHEMA_NAME VARCHAR(300),
+            TRG_TABLE_NAME VARCHAR(300),
+            TRG_COLUMN VARCHAR(300),
+            TEST_CASE_STATUS VARCHAR(5)
+            )
+  
+
+
+vars:
+    db_src: raw_stg                     #source database
+    db_trg: raw_stg                     #target database
+    src_schema: sdm                     #source schema
+    trg_schema: cdm                     #target schema
+    dc_src_table: CUSTOMERS             #source customer table
+    dc_trg_table: CUSTOMERS_STG         #target customer table
+    
+    check_column: ID                    #column to be checked
+    source_src_raw: src_jaffle_shop     #it is source for the raw tabel
+    source_trg_raw_stg: trg_jaffle_shop # it is source for target raw_stg
+
+    dc_src_table_orders: ORDERS         #target orders table
+    dc_trg_table_orders: ORDERS_STG     #source orders table
+    
+  
+
+    list_check : ['id','last_name','first_name']   #list for customers table columns
+
+    list_check_orders : ['ID','USER_ID','ORDER_DATE','STATUS','_ETL_LOADED_AT']   #list for orders table columns
+
+    check_date_format_column: 'ORDER_DATE'         #date data type column
+
+    
+    report_output_table: test_output_table         #table name of report
+    suite_name: suite_id                           #suite id of a particular suite
+    test_case_status: test_case_status             # status of test case
+    suite_start_time: suite_start_at               #execution start time of suite

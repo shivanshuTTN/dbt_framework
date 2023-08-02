@@ -1,0 +1,17 @@
+version 2:
+
+sources:
+  - name: jaffle_shop
+    database: raw_stg
+    schema: sdm
+    tables : 
+      - name: customers
+      - name: orders
+  - name: trg_jaffle_shop
+    database: raw_stg
+    schema: cdm
+    tables:
+      - name: customers_stg
+      - name: orders_stg
+
+
