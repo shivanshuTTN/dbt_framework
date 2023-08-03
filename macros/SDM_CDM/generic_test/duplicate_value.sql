@@ -1,6 +1,5 @@
 {% macro duplicate_value(src_database_name,src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_name,suite_start_time,suite_id,column_list)%}
 
-
     {{log('duplicate value test case execution started',info=true)}}
 
     -- Calculating the time of execution of the curret test

@@ -25,7 +25,7 @@
         {%endset%}
 
         
-        {%  set results=run_query(query)%}
+        {%set results=run_query(query)%}
         {%set results_list=results.columns[0].values()%}
         
 
@@ -40,7 +40,7 @@
             
         -- Insert macro called to insert in test report
         {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'null_value','generic', var("db_src"),
-        var("src_schema"),var("dc_src_table_orders"),trg_database_name,trg_schema_name,trg_table_name,column_value,results_list[0])}}
+        var("src_schema"),src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_value,results_list[0])}}
 
     {% endfor %}
     

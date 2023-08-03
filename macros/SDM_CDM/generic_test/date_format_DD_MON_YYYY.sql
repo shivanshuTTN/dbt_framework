@@ -1,6 +1,6 @@
 {% macro date_format_DD_MON_YYYY(src_database_name,src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_name,suite_start_time,suite_id)%}
 
-{{log('date_format_DD_MON_YYYY test execution started ',info=true)}}
+    {{log('date_format_DD_MON_YYYY test execution started ',info=true)}}
     {%set query%}
           Select 
           case when cnt=0 then 'pass' else 'fail' end 
@@ -17,5 +17,6 @@
 
     {{log(date_format_list[0],info=true)}}
 
-{{log('date_format_DD_MON_YYYY test execution ended ',info=true)}}
+    {{log('date_format_DD_MON_YYYY test execution ended ',info=true)}}
+
 {% endmacro %}

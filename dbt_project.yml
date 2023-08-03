@@ -75,6 +75,9 @@ vars:
 
     list_check_orders : ['ID','USER_ID','ORDER_DATE','STATUS','_ETL_LOADED_AT']   #list for orders table columns
 
+    list_status_shipped: ['customer_id','first_name','last_name','order_id','order_date','order_status','_etl_loaded_at']
+    check_status_column: customer_id 
+
     check_date_format_column: 'ORDER_DATE'         #date data type column
 
     
@@ -86,3 +89,6 @@ vars:
     foreign_key_column_cust: id
     foreign_key_column_order: user_id
     o_status: shipped
+    src1_src2_table: customers_vs_orders
+
+

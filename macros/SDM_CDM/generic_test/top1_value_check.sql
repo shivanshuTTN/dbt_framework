@@ -1,4 +1,4 @@
-{% macro top1_value_check(src_database_name,src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_name,suite_start_time,suite_id,column_list)%}
+{% macro top1_value_check(src_database_name,src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_name,suite_start_time,suite_id,column_list,src_joined_table)%}
 
     {{log('top1_value_check test case execution started',info=true)}}
 
