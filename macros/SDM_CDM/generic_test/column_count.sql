@@ -17,7 +17,7 @@
     {%set query%}
     
         Select 
-        case when src_column_count=trg_column_count then 'pass' else 'fail' end as status from
+        case when src_column_count=trg_column_count then 'PASS' else 'FAIL' end as status from
         (select count(*) as src_column_count from {{src_database_name}}.INFORMATION_SCHEMA.columns
         where table_name='{{src_table_name}}') as src_tb,
         (select count(*) as trg_column_count from {{trg_database_name}}.INFORMATION_SCHEMA.columns 
@@ -41,7 +41,7 @@
    
     -- Insert macro called to insert in test report
     
-    {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'column_count','generic', src_database_name,
+    {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'column_count','src vs landing', src_database_name,
     src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,'none',results_list[0])}}
     {{log('column value test case execution ended',info=true)}}
  

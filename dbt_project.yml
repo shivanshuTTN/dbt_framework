@@ -35,22 +35,7 @@ models:
   dbt_framework_dev:
       +materialized: view
   #pre hook for creating a test output table for report making
-  pre-hook: CREATE TABLE IF NOT EXISTS raw_stg.cdm.TEST_OUTPUT_TABLE
-            (QUERY_ID VARCHAR(300), 
-            SUITE_START_AT VARCHAR(300),
-            EXECUTION_DATETIME VARCHAR(300),
-            SUITE_ID VARCHAR(300),
-            TEST_CASE_ID VARCHAR(300),
-            TEST_CASE_TYPE VARCHAR(300),
-            SRC_DB_NAME VARCHAR(300),
-            SRC_SCHEMA_NAME VARCHAR(300),
-            SRC_TABLE_NAME VARCHAR(300),
-            TRG_DB_NAME VARCHAR(300),
-            TRG_SCHEMA_NAME VARCHAR(300),
-            TRG_TABLE_NAME VARCHAR(300),
-            TRG_COLUMN VARCHAR(300),
-            TEST_CASE_STATUS VARCHAR(5)
-            )
+  
   
 
 
@@ -75,8 +60,9 @@ vars:
 
     list_check_orders : ['ID','USER_ID','ORDER_DATE','STATUS','_ETL_LOADED_AT']   #list for orders table columns
 
-    list_status_shipped: ['customer_id','first_name','last_name','order_id','order_date','order_status','_etl_loaded_at']
-    check_status_column: customer_id 
+    #list of columns of a table made after joining customers and orders on basis of shipped status
+    
+    check_status_column: customer_id   
 
     check_date_format_column: 'ORDER_DATE'         #date data type column
 
@@ -86,9 +72,17 @@ vars:
     test_case_status: test_case_status             # status of test case
     suite_start_time: suite_start_at               #execution start time of suite
 
-    foreign_key_column_cust: id
-    foreign_key_column_order: user_id
-    o_status: shipped
-    src1_src2_table: customers_vs_orders
+
+    #these variables are for validation of table made after joinig
+    foreign_key_column_cust: id       # column on basis of  which joining will be done  in customers gtable
+    foreign_key_column_order: user_id # column on basis of  which joining will be done  in orders gtable
+    o_status: shipped                 # order status to be checked
+    src1_src2_table: customers_vs_orders    # tabble made after apllying joining condition
+
+    #list of columns of a table made after joining customers and orders on basis of shipped status
+    list_status_shipped: ['CUSTOMER_ID','FIRST_NAME','LAST_NAME','ORDER_ID','ORDER_DATE','ORDER_STATUS','_ETL_LOADED_AT']
 
 
+    #dict_customers: {"cust_columns":['id','last_name','first_name']}
+    #dict_orders: {"order_columns:['ID','USER_ID','ORDER_DATE','STATUS','_ETL_LOADED_AT']"}
+    #dict_cut_order: {"cust_order:['CUSTOMER_ID','FIRST_NAME','LAST_NAME','ORDER_ID','ORDER_DATE','STATUS','_ETL_LOADED_AT']"}

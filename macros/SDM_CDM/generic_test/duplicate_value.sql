@@ -17,7 +17,7 @@
     {%for column_value in column_list %}
         {%set query%}
             Select  
-            case  when cnt=0 then 'pass' else 'fail' end from
+            case  when cnt=0 then 'PASS' else 'FAIL' end from
             (Select count({{column_value}}) as cnt  from 
             (Select {{column_value}} from {{trg_database_name}}.{{trg_schema_name}}.{{trg_table_name}}
             group by ({{column_value}}) having count({{column_value}})>1))
@@ -36,7 +36,7 @@
         {%set query_id_result=results.columns[0].values()%}
             
         -- Insert macro called to insert in test report
-        {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'duplicate_value','generic', src_database_name,
+        {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'duplicate_value','src vs landing', src_database_name,
         src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_value,results_list[0])}}
 
     {%  endfor %}

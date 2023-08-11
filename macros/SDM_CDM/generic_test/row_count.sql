@@ -20,7 +20,7 @@
         {% set query%}
 
             Select  
-            case when src_cnt=trg_cnt then 'pass ' else 'fail' end as status
+            case when src_cnt=trg_cnt then 'PASS' else 'FAIL' end as status
             from  (Select count({{column_value}}) as src_cnt 
             from {{src_database_name}}.{{src_schema_name}}.{{src_table_name}} ) as src_tb,
             (Select count({{column_value}}) as trg_cnt 
@@ -41,7 +41,7 @@
         {%set query_id_result=results.columns[0].values()%}
         
         -- Insert macro called to insert in test report
-        {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'row_count','generic', src_database_name,
+        {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'row_count','src vs landing', src_database_name,
         src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_value,results_list[0])}}
 
     {%endfor%}

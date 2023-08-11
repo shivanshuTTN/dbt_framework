@@ -15,7 +15,7 @@
 
     {%set query%}
         Select 
-        case when cnt=0 then 'pass' else 'fail' end 
+        case when cnt=0 then 'PASS' else 'FAIL' end 
         from
         (Select count(*) as cnt from 
         (Select try_to_date(substr({{column_name}},0,10),'YYYY-MM-DD') as new_date 
@@ -38,10 +38,11 @@
     {%set query_id_result=results.columns[0].values()%}
         
     -- Insert macro called to insert in test report
-    {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'date_format_YYYY_MM_DD','generic', src_database_name,
+    {{insert_macro(query_id_result[0],suite_start_time,results_testcase_time[0],suite_id,'date_format_YYYY_MM_DD','src vs landing', src_database_name,
     src_schema_name,src_table_name,trg_database_name,trg_schema_name,trg_table_name,column_name,date_format_list[0])}}
 
 
     {{log('date_format_YYYY_MM_DD test execution ended ',info=true)}}
+    
 
 {% endmacro %}

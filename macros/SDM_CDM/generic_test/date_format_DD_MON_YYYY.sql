@@ -3,7 +3,7 @@
     {{log('date_format_DD_MON_YYYY test execution started ',info=true)}}
     {%set query%}
           Select 
-          case when cnt=0 then 'pass' else 'fail' end 
+          case when cnt=0 then 'PASS' else 'FAIL' end 
           from
           (Select count(*) as cnt from (
           Select try_to_date(substr({{column_name}},0,10),'DD-MON-YYYY') as new_date 
